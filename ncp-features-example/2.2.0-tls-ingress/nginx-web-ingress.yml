@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - tls-ingress.ytsuboi.local
+    - tls-ingress.demo.corp.local
     secretName: tls-ingress
   rules:
-  - host: tls-ingress.ytsuboi.local
+  - host: tls-ingress.demo.corp.local
     http:
       paths:
       - path: "/"
