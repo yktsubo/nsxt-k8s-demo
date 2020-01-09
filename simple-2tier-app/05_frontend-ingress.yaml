@@ -5,7 +5,7 @@ metadata:
   namespace: frontend
 spec:
   rules:
-  - host: frontend.ytsuboi.local
+  - host: frontend.app.corp.local
     http:
       paths:
       - backend:

@@ -1,11 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: apple-demo-policy
+  name: nsxdemo-allow-http
+  namespace: apple
 spec:
   podSelector:
     matchLabels:
-      app: apple-demo
+      app: nsxdemo
   policyTypes:
   - Ingress
   ingress:

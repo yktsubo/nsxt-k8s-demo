@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug
+  namespace: apple
+  labels:
+    app: debug
+spec:
+  containers:
+  - image: ytsuboi/debug
+    imagePullPolicy: IfNotPresent
+    name: debug

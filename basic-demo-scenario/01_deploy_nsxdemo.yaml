@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: apple
+  name: nginx
+data:
+  nginx.conf: |
+    worker_processes 5;
+    events {
+    }
+    http {
+      # This is the main site.
+      server {
+        listen 80 default_server;
+        default_type text/plain;
+
+        location / {
+          return 200 "Hostname: $hostname\nUser: $remote_user\nProtocol: $server_protocol\nMethod: $request_method\nPath: $request_uri\nServer: $server_addr\nHttp_host: $http_host\nuser_agent: $http_user_agent\nRemote IP: $remote_addr\n";
+        }
+
+        location = /healthz {
+          add_header Content-Type text/plain;
+          return 200 'ok';
+        }
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nsxdemo
+  namespace: apple
+  labels:
+    app: nsxdemo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nsxdemo
+  template:
+    metadata:
+      labels:
+        app: nsxdemo
+    spec:
+      containers:
+      - name: nsxdemo
+        image: nginx:stable-alpine
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          initialDelaySeconds: 3
+          timeoutSeconds: 2
+          failureThreshold: 2
+        volumeMounts:
+        - name: nginx
+          mountPath: /etc/nginx
+          readOnly: true
+      volumes:
+      - name: nginx
+        configMap:
+          name: nginx
