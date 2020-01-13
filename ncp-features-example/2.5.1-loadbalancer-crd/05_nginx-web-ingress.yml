@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-loadbalancer-crd
+  namespace: ncp-feature
+  labels:
+    feature: loadbalancer-crd   
+  annotations:
+    nsx/loadbalancer: crd-lb 
+spec:
+  rules:
+  - host: loadbalancer-crd.crd-lb.corp.local
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: nginx-loadbalancer-crd
+          servicePort: 80
+  tls:
+  - hosts:
+    - loadbalancer-crd.crd-lb.corp.local

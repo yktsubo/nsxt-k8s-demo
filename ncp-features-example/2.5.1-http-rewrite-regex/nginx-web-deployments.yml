@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-${FEATURE_NAME}
+  name: nginx-http-rewrite-regex
   namespace: ncp-feature
   labels:
-    feature: ${FEATURE_NAME} 
+    feature: http-rewrite-regex 
 spec:
   replicas: 2
   selector:
     matchLabels:
-      feature: ${FEATURE_NAME}       
+      feature: http-rewrite-regex       
   template:
     metadata:
       labels:
-        feature: ${FEATURE_NAME} 
+        feature: http-rewrite-regex 
     spec:
       containers:
-      - name: nginx-${FEATURE_NAME} 
+      - name: nginx-http-rewrite-regex 
         image: nginx:stable-alpine
         imagePullPolicy: IfNotPresent
         ports:

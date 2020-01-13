@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-${FEATURE_NAME}
+  name: nginx-http-redirect
   namespace: ncp-feature
   labels:
-    feature: ${FEATURE_NAME} 
+    feature: http-redirect 
 spec:
   replicas: 2
   selector:
     matchLabels:
-      feature: ${FEATURE_NAME}       
+      feature: http-redirect       
   template:
     metadata:
       labels:
-        feature: ${FEATURE_NAME} 
+        feature: http-redirect 
     spec:
       containers:
-      - name: nginx-${FEATURE_NAME} 
+      - name: nginx-http-redirect 
         image: nginx:stable-alpine
         imagePullPolicy: IfNotPresent
         ports:

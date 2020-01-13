@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-http-redirect
+  namespace: ncp-feature
+  labels:
+    feature: http-redirect   
+  annotations:
+    ncp/http-redirect: "true"
+spec:
+  rules:
+  - host: http-redirect.demo.corp.local
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: nginx-http-redirect
+          servicePort: 80
+  tls:
+  - hosts:
+    - http-redirect.demo.corp.local

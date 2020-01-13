@@ -1,26 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-${FEATURE_NAME}
+  name: nginx-loadbalancer-crd
   namespace: ncp-feature
   labels:
-    feature: ${FEATURE_NAME} 
+    feature: loadbalancer-crd
 spec:
   replicas: 2
   selector:
     matchLabels:
-      feature: ${FEATURE_NAME}       
+      feature: loadbalancer-crd
   template:
     metadata:
       labels:
-        feature: ${FEATURE_NAME} 
+        feature: loadbalancer-crd
     spec:
       containers:
-      - name: nginx-${FEATURE_NAME} 
+      - name: nginx-loadbalancer-crd
         image: nginx:stable-alpine
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 80
+        - name: http
+          containerPort: 80
         volumeMounts:
         - name: nginx
           mountPath: /etc/nginx

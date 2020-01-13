@@ -1,0 +1,18 @@
+apiVersion: vmware.com/v1alpha1
+kind: LoadBalancer
+metadata:
+  name: crd-lb
+spec:
+  httpConfig:
+    virtualIP: 10.3.1.250
+    #port: 8080
+    port: 80
+    xForwardedFor: INSERT
+    affinity:
+      type: cookie
+      timeout: 20000
+    tls:
+      #port: 8443
+      port: 443
+      secretName: crd-lb-cert
+      secretNamespace: ncp-feature

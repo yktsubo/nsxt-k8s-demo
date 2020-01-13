@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: ncp-feature
+  name: nginx
+data:
+  nginx.conf: |
+    worker_processes 5;
+    events {
+    }
+    http {
+      # This is the main site.
+      server {
+        listen 80 default_server;
+        default_type text/plain;
+
+        location / {
+          return 200 "Hostname: $hostname\nUser: $remote_user\nProtocol: $server_protocol\nMethod: $request_method\nPath: $request_uri\nServer: $server_addr\nHttp_host: $http_host\nuser_agent: $http_user_agent\nRemote IP: $remote_addr\nX-Forwarded-For: $proxy_add_x_forwarded_for\ncookie: $http_cookie\n";
+        }
+
+        location = /healthz {
+          add_header Content-Type text/plain;
+          return 200 'ok';
+        }
+      }
+    }

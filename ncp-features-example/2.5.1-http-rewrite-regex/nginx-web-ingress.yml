@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-http-rewrite-regex
+  namespace: ncp-feature
+  labels:
+    feature: http-rewrite-regex   
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /$2
+    ncp/use-regex: "true"
+spec:
+  rules:
+  - host: http-rewrite-regex.demo.corp.local
+    http:
+      paths:
+      - path: /(rewrite|regex)/(.*)
+        backend:
+          serviceName: nginx-http-rewrite-regex
+          servicePort: 80
