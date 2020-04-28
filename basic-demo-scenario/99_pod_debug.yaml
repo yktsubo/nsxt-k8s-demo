@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: debug
+  name: debug4
   namespace: apple
   labels:
     app: debug
