@@ -21,11 +21,17 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
+        - containerPort: 443
         volumeMounts:
         - name: nginx
           mountPath: /etc/nginx
           readOnly: true
+        - mountPath: /etc/nginx/ssl
+          name: nginx-ssl
       volumes:
       - name: nginx
         configMap:
           name: nginx
+      - name: nginx-ssl
+        secret:
+          secretName: nginx-ssl
