@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: debug-nginx
+  namespace: debug
+spec:
+  rules:
+  - host: debug-nginx.app.corp.local
+    http:
+      paths:
+      - backend:
+          serviceName: demo-service
+          servicePort: 80
