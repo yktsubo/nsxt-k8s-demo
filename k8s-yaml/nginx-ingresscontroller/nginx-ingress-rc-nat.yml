@@ -4,8 +4,6 @@ metadata:
   name: nginx-ingress-rc-nat
   labels:
     app: nginx-ingress-rc-nat
-  annotations:
-    ncp/ingress-controller: "True"
 spec:
   replicas: 1
   template:
@@ -19,9 +17,9 @@ spec:
         name: nginx-ingress
         ports:
         - containerPort: 80
-          hostPort: 80
+          hostPort: 10080
         - containerPort: 443
-          hostPort: 443
+          hostPort: 10443
         env:
         - name: POD_NAMESPACE
           valueFrom:

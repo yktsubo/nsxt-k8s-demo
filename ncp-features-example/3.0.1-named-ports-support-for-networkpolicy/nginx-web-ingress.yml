@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-named-ports-support-for-networkpolicy
+  namespace: ncp-feature
+  labels:
+    feature: named-ports-support-for-networkpolicy   
+spec:
+  rules:
+  - host: named-ports-support-for-networkpolicy.demo.corp.local
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: nginx-named-ports-support-for-networkpolicy
+          servicePort: 80

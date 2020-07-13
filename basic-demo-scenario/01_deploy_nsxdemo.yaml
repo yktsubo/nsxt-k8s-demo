@@ -15,7 +15,7 @@ data:
         default_type text/plain;
 
         location / {
-          return 200 "Hostname: $hostname\nUser: $remote_user\nProtocol: $server_protocol\nMethod: $request_method\nPath: $request_uri\nServer: $server_addr\nHttp_host: $http_host\nuser_agent: $http_user_agent\nRemote IP: $remote_addr\n";
+         return 200 "Hostname: $hostname\nUser: $remote_user\nProtocol: $server_protocol\nMethod: $request_method\nPath: $request_uri\nServer: $server_addr\nHttp_host: $http_host\nuser_agent: $http_user_agent\nRemote IP: $remote_addr\nX-Forwarded-For: $http_x_forwarded_for\ncookie: $http_cookie\n";
         }
 
         location = /healthz {

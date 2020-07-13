@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nginx-named-ports-support-for-networkpolicy
+  namespace: ncp-feature
+  labels:
+    feature: named-ports-support-for-networkpolicy
+spec:
+  podSelector:
+    matchLabels:
+      feature: named-ports-support-for-networkpolicy
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: 100.64.0.0/16
+    - podSelector:
+        matchLabels:
+          feature: named-ports-support-for-networkpolicy
+    ports:
+    - protocol: TCP
+      port: http
+    - protocol: TCP
+      port: https

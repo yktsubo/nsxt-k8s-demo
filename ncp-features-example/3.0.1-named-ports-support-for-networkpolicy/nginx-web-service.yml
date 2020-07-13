@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-named-ports-support-for-networkpolicy
+  namespace: ncp-feature
+  labels:
+    feature: named-ports-support-for-networkpolicy 
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: tcp
+  selector:
+    feature: named-ports-support-for-networkpolicy

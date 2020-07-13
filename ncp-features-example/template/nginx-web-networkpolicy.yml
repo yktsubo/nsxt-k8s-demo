@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nginx-${FEATURE_NAME}
+  namespace: ncp-feature
+  labels:
+    feature: ${FEATURE_NAME}
+spec:
+  podSelector:
+    # matchExpressions:
+    #   - {key: feature, operator: In, values: [${FEATURE_NAME}, client]}
+    matchLabels:
+      feature: ${FEATURE_NAME}
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: 100.64.0.0/16
+    - podSelector:
+        matchLabels:
+          feature: ${FEATURE_NAME}
+    ports:
+    - protocol: TCP
+      port: 80
+    - protocol: TCP
+      port: 443

@@ -492,7 +492,7 @@ data:
 
     # If set to true, the logging level will be set to DEBUG instead of the
     # default INFO level.
-    #debug = False
+    debug = True
 
     # If set to true, log output to standard error.
     #use_stderr = True
@@ -666,6 +666,7 @@ data:
     # separated list: CIDR,CIDR,... Mixing different formats (e.g. UUID,CIDR)
     # is not supported.
     container_ip_blocks = "172.28.0.0/17,172.28.128.0/17"
+    #container_ip_blocks = "172.16.0.0/16"
 
     # Resource ID of the container ip blocks that will be used for creating
     # subnets for no-SNAT projects. If specified, no-SNAT projects will use
@@ -678,13 +679,15 @@ data:
     # creating the ip pools. The definition is a comma separated list:
     # CIDR,IP_1-IP_2,... Mixing different formats (e.g. UUID, CIDR&IP_Range) is
     # not supported.
-    external_ip_pools = "192.168.93.64/27,192.168.93.96/27"
+    # external_ip_pools = "192.168.93.64/27,192.168.93.96/27"
+    external_ip_pools = "192.168.94.0/25"
 
 
     # Resource ID of the top-tier router for the container cluster network,
     # which could be either tier0 or tier1. If policy_nsxapi is enabled, should
     # be ID of a tier0/tier1 gateway.
     top_tier_router = T1-NCP
+    #tier0_gateway = T0-Static
 
     # Option to use single-tier router for the container cluster network
     single_tier_topology = True
@@ -700,7 +703,7 @@ data:
     # creating logical switches for container networking. It must refer to an
     # already existing resource on NSX and every transport node where VMs
     # hosting containers are deployed must be enabled on this transport zone
-    #overlay_tz = <None>
+    #overlay_tz = '1b3a2f36-bfd1-443e-a0f6-4de01abc963e'
 
     # Name of the enforcement point used to look up overlay transport zones and
     # edge cluster paths, e.g. vmc-enforcementpoint, default, etc.
@@ -757,7 +760,7 @@ data:
     #dns_servers = []
 
     # Set this to True to enable NCP to report errors through NSXError CRD.
-    #enable_nsx_err_crd = False
+    enable_nsx_err_crd = True
 
     # Maximum number of virtual servers allowed to create in cluster for
     # LoadBalancer type of services.
@@ -765,10 +768,10 @@ data:
 
     # Edge cluster ID needed when creating Tier1 router for loadbalancer
     # service. Information could be retrieved from Tier0 router
-    #edge_cluster = <None>
+    #edge_cluster = 'aad64333-5d7a-426b-a442-0efea72316a8'
 
     # Inventory feature switch
-    #enable_inventory = True
+    enable_inventory = True
 
 
 
@@ -784,7 +787,7 @@ data:
     # NCP will create IP prefix list on the existing route map. Otherwise NCP
     # will create a new route map and attach it. This option could be used only
     # in SNAT mode and when policy_nsxapi = True.
-    #configure_t0_redistribution = False
+    #configure_t0_redistribution = True
 
 
     # Health check interval for nsx lb monitor profile
@@ -938,7 +941,7 @@ data:
 
     # Set this to True to enable NCP to create LoadBalancer on a Tier-1 for
     # LoadBalancer CRD. This option does not support LB autoscaling.
-    #enable_lb_crd = False
+    enable_lb_crd = True
 
     # Option to set the type of baseline cluster policy. ALLOW_CLUSTER creates
     # an explicit baseline policy to allow any pod to communicate any other pod
@@ -970,7 +973,7 @@ data:
     # Interval of polling loadbalancer statistics. Default to60 seconds.
     #lb_statistic_monitor_interval = 60
 
-
+    
 
 
     #[nsx_v3]

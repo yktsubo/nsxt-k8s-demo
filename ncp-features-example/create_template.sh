@@ -25,5 +25,6 @@ mkdir -p ./${NCP_VERSION}-${FEATURE_NAME}
 cat template/nginx-web-deployments.yaml | envsubst > ./${NCP_VERSION}-${FEATURE_NAME}/nginx-web-deployments.yml
 cat template/nginx-web-ingress.yaml | envsubst > ./${NCP_VERSION}-${FEATURE_NAME}/nginx-web-ingress.yml
 cat template/nginx-web-service.yaml | envsubst > ./${NCP_VERSION}-${FEATURE_NAME}/nginx-web-service.yml
+cat template/nginx-web-networkpolicy.yml |  envsubst > ./${NCP_VERSION}-${FEATURE_NAME}/nginx-web-networkpolicy.yml
 
 exit 0

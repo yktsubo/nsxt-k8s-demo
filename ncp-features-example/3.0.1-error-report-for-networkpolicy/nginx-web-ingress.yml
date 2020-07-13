@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-error-report-for-networkpolicy
+  namespace: ncp-feature
+  labels:
+    feature: error-report-for-networkpolicy   
+spec:
+  rules:
+  - host: error-report-for-networkpolicy.demo.corp.local
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: nginx-error-report-for-networkpolicy
+          servicePort: 80

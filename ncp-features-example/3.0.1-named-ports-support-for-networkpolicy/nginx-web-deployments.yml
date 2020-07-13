@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-named-ports-support-for-networkpolicy
+  namespace: ncp-feature
+  labels:
+    feature: named-ports-support-for-networkpolicy 
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      feature: named-ports-support-for-networkpolicy       
+  template:
+    metadata:
+      labels:
+        feature: named-ports-support-for-networkpolicy 
+    spec:
+      containers:
+      - name: nginx-named-ports-support-for-networkpolicy
+        image: nginx:stable-alpine
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 443
+          name: https
+        volumeMounts:
+        - name: nginx
+          mountPath: /etc/nginx
+          readOnly: true
+        - mountPath: /etc/nginx/ssl
+          name: nginx-ssl
+      volumes:
+      - name: nginx
+        configMap:
+          name: nginx
+      - name: nginx-ssl
+        secret:
+          secretName: nginx-ssl
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-named-ports-support-for-networkpolicy2
+  namespace: ncp-feature
+  labels:
+    feature: named-ports-support-for-networkpolicy 
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      feature: named-ports-support-for-networkpolicy       
+  template:
+    metadata:
+      labels:
+        feature: named-ports-support-for-networkpolicy 
+    spec:
+      containers:
+      - name: nginx-named-ports-support-for-networkpolicy2
+        image: nginx:stable-alpine
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+        - containerPort: 8443
+          name: https
+        volumeMounts:
+        - name: nginx
+          mountPath: /etc/nginx
+          readOnly: true
+        - mountPath: /etc/nginx/ssl
+          name: nginx-ssl
+      volumes:
+      - name: nginx
+        configMap:
+          name: nginx
+      - name: nginx-ssl
+        secret:
+          secretName: nginx-ssl

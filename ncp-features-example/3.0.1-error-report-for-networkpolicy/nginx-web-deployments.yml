@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-${FEATURE_NAME}
+  name: nginx-error-report-for-networkpolicy
   namespace: ncp-feature
   labels:
-    feature: ${FEATURE_NAME} 
+    feature: error-report-for-networkpolicy 
 spec:
   replicas: 2
   selector:
     matchLabels:
-      feature: ${FEATURE_NAME}       
+      feature: error-report-for-networkpolicy       
   template:
     metadata:
       labels:
-        feature: ${FEATURE_NAME} 
+        feature: error-report-for-networkpolicy 
     spec:
       containers:
-      - name: nginx-${FEATURE_NAME} 
+      - name: nginx-error-report-for-networkpolicy 
         image: nginx:stable-alpine
         imagePullPolicy: IfNotPresent
         ports:
