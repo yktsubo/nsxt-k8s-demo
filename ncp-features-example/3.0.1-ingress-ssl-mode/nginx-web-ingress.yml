@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-ingress-ssl-mode
+  namespace: ncp-feature
+  annotations:
+    ncp/ssl-mode: 'passthrough'
+  labels:
+    feature: ingress-ssl-mode   
+spec:
+  rules:
+  - host: ingress-ssl-mode.demo.corp.local
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: nginx-ingress-ssl-mode
+          servicePort: 443

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-ingress-ssl-mode
+  namespace: ncp-feature
+  labels:
+    feature: ingress-ssl-mode 
+spec:
+  ports:
+    - port: 443
+      targetPort: 443
+      protocol: TCP
+      name: tcp
+  selector:
+    feature: ingress-ssl-mode

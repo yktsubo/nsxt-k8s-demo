@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nginx-ingress-ssl-mode
+  namespace: ncp-feature
+  labels:
+    feature: ingress-ssl-mode
+spec:
+  podSelector:
+    # matchExpressions:
+    #   - {key: feature, operator: In, values: [ingress-ssl-mode, client]}
+    matchLabels:
+      feature: ingress-ssl-mode
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: 100.64.0.0/16
+    - podSelector:
+        matchLabels:
+          feature: ingress-ssl-mode
+    ports:
+    - protocol: TCP
+      port: 80
+    - protocol: TCP
+      port: 443
