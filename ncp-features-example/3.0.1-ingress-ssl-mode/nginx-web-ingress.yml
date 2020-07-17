@@ -8,11 +8,13 @@ metadata:
   labels:
     feature: ingress-ssl-mode   
 spec:
+  tls:
+  - hosts:
+    - ingress-ssl-mode.demo.corp.local
   rules:
   - host: ingress-ssl-mode.demo.corp.local
     http:
       paths:
-      - path: "/"
-        backend:
+      - backend:
           serviceName: nginx-ingress-ssl-mode
           servicePort: 443

@@ -2,16 +2,16 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: nginx-tls-ingress
-  namespace: ncp-feature
+  namespace: test
   labels:
     feature: tls-ingress   
 spec:
   tls:
   - hosts:
-    - tls-ingress.demo.corp.local
+    - tls-ingress2.demo.corp.local
     secretName: tls-ingress
   rules:
-  - host: tls-ingress.demo.corp.local
+  - host: tls-ingress2.demo.corp.local
     http:
       paths:
       - path: "/"

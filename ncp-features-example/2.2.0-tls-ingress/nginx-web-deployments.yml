@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-tls-ingress
-  namespace: ncp-feature
+  namespace: test
   labels:
     feature: tls-ingress 
 spec:
